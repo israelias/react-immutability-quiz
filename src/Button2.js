@@ -71,6 +71,8 @@ export default Button2;
  *
  * Why?
  *
+ *    Lazily-initialized state variable is the first thing to mount.
+ *
  *    Calling setState only affects the next render
  *    and does not change state in the already running code.
  *
