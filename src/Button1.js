@@ -36,6 +36,7 @@ const Button1 = () => {
 
   return (
     <div>
+      <p>Button1</p>
       <button onClick={() => handleClick()}>{count}</button>
     </div>
   );
@@ -57,9 +58,10 @@ export default Button1;
  *    First click:
  *
  *      {a: 1, b: 2}
- *      2
+ *      a 2
  *
  * Why?
- *    useEffect runs both after the first render and
- *    after every update.
+ *    useEffect runs after the first render and
+ *    after every update. Our setState update inside our effect hook
+ *    triggers an update, thus and immediate re-render. Hence `a` is printed twice on first render.
  */

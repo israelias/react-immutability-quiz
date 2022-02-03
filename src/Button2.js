@@ -15,7 +15,10 @@ import React, { useState, useEffect } from "react";
  *    3. What, if any, will be printed on the console on second click?
  */
 const Button2 = () => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(() => {
+    console.log("b", 2);
+    return 0;
+  });
 
   const obj1 = {
     a: 1,
@@ -35,6 +38,7 @@ const Button2 = () => {
 
   return (
     <div>
+      <p>Button2</p>
       <button onClick={() => handleClick()}>{count}</button>
     </div>
   );
@@ -48,6 +52,7 @@ export default Button2;
  *
  *    First render:
  *
+ *      b 2
  *      a 0
  *      obj1 {a: 1, b: 2}
  *
@@ -74,13 +79,12 @@ export default Button2;
  *      console.log("a", count); // 0
  *
  *       const handleClick = () => {
- *          setCount(count + obj1.a); // request a re-render with `obj1.a` (1)
- *          console.log("b", count);  // still 0! and triggers a re-render, thus a is printed again.
+ *          setCount(count + obj1.a); // request a re-render with `+ obj1.a` (+ 1)
+ *          console.log("b", count);  // still 0! and triggers a re-render, thus `a` is printed again.
  *     };
  *
- *   Our Effect hook will always render obj1 even if we addeed it to our deps and made no changes to obj1.
- *   This is because objects are immutable datatypes, so every update creates new value, leaving the old one untouched.
- *   React uses Object.is comparison.
+ *   Our Effect hook will always render obj1 even if we added it to our deps and made no changes to obj1.
+ *   This is because objects are immutable datatypes, so every update creates a new value, leaving the old one untouched.
  *
  *
  *

@@ -37,6 +37,7 @@ const Button3 = () => {
 
   return (
     <div>
+      <p>Button3</p>
       <button onClick={() => handleClick()}>{count}</button>
     </div>
   );
@@ -61,13 +62,12 @@ export default Button3;
  *
  *    Second click:
  *
- *      2
+ *      1
  *
  * Why?
  *
- *   Destructuring obj1 makes a copy of the datatype by declarings
  *   Object destructuring allows us to create new variables using obj1's properties as the values.
- *   React uses Object.is comparison to the a and b variables we've listed in our effect dependencies,
+ *   React uses Object.is comparison to the `a` and `b` variables we've listed in our effect dependencies,
  *   Because these never change, and our onClick simply logs `count`, our effect hook never triggers a re-render.
  *
  *
