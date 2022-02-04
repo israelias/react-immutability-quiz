@@ -37,7 +37,7 @@ const Button3 = () => {
 
   return (
     <div>
-      <p>Button3</p>
+      <h1>Button3</h1>
       <button onClick={() => handleClick()}>{count}</button>
     </div>
   );
@@ -70,8 +70,8 @@ export default Button3;
  *   to see `a` printed twice: first with the initial value, and again with the new value set in
  *   the effect body. All of this happens on initial render.
  *
- *   Between both logs of `a`, object destructuring allows us to create new variables using `obj1`'s 
- *   properties as the values. React uses `Object.is` comparison to the `a` and `b` variables we've 
+ *   Between both logs of `a`, object destructuring allows us to create new variables using `obj1`'s
+ *   properties as the values. React uses `Object.is` comparison to the `a` and `b` variables we've
  *   listed in our effect dependencies. Because these values never change, and our onClick simply logs
  *   `count`; our effect hook never triggers a re-render, and the result of clicking is always the same.
  *
