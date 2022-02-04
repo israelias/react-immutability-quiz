@@ -61,7 +61,12 @@ export default Button1;
  *      a 2
  *
  * Why?
- *    useEffect runs after the first render and
- *    after every update. Our setState update inside our effect hook
- *    triggers an update, thus and immediate re-render. Hence `a` is printed twice on first render.
+ *    useEffect runs after the first render and after every update. 
+ *    Our setState update inside our effect hook triggers an update, 
+ *    thus an immediate re-render. Hence `a` is printed twice on first render.
+ *    
+ *    Our setState update on every click also triggers a re-render, but does not
+ *    change state in the already running code. This is why {a: 1, b: 2} always logs
+ *    before the re-rendered `a`.
+ *    
  */
