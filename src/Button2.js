@@ -71,10 +71,13 @@ export default Button2;
  *
  * Why?
  *
- *    Lazily-initialized state variable is the first thing to mount.
+ *    Lazily-initialized state variable is the first thing to mount. So `b 2` is rendered once,
+ *    while return 0 as the initial value of `count`, thus `a 0` is printed. And since we're printing
+ *    in our effect hook, `obj1 {a: 1, b: 2}` will render on first load as well.    
  *
- *    Calling setState only affects the next render
- *    and does not change state in the already running code.
+ *    On click, we setState which only affects the next render and does not change state in the already 
+ *    handler. Hence, `b` with the initial value of count is rendered first, then `a` with the new value 
+ *    count as a result of our triggered re-render. 
  *
  *
  *    ie:
@@ -85,9 +88,7 @@ export default Button2;
  *          console.log("b", count);  // still 0! and triggers a re-render, thus `a` is printed again.
  *     };
  *
- *   Our Effect hook will always render obj1 even if we added it to our deps and made no changes to obj1.
+ *   Finally, our effect hook will always render obj1 even if we added it to our deps and made no changes to obj1.
  *   This is because objects are immutable datatypes, so every update creates a new value, leaving the old one untouched.
- *
- *
  *
  */
