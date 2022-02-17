@@ -38,7 +38,7 @@ const Button2 = () => {
 
   return (
     <div>
-      <p>Button2</p>
+      <h1>Button2</h1>
       <button onClick={() => handleClick()}>{count}</button>
     </div>
   );
@@ -73,11 +73,11 @@ export default Button2;
  *
  *    Lazily-initialized state variable is the first thing to mount. So `b 2` is rendered once,
  *    while return 0 as the initial value of `count`, thus `a 0` is printed. And since we're printing
- *    in our effect hook, `obj1 {a: 1, b: 2}` will render on first load as well.    
+ *    in our effect hook, `obj1 {a: 1, b: 2}` will render on first load as well.
  *
- *    On click, we setState which only affects the next render and does not change state in the already 
- *    handler. Hence, `b` with the initial value of count is rendered first, then `a` with the new value 
- *    count as a result of our triggered re-render. 
+ *    On click, we setState which only affects the next render and does not change state in the already
+ *    handler. Hence, `b` with the initial value of count is rendered first, then `a` with the new value
+ *    count as a result of our triggered re-render.
  *
  *
  *    ie:
