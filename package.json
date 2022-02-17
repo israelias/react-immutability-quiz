@@ -6,7 +6,9 @@
   "homepage": "https://codesandbox.io/s/zzloxr09mp",
   "main": "index.js",
   "dependencies": {
+    "prop-types": "15.8.1",
     "react": "^17.0.0",
+    "react-confirm-alert": "2.6.1",
     "react-dom": "^17.0.0",
     "react-scripts": "^4.0.0"
   },
@@ -14,11 +16,11 @@
     "react-scripts": "1.0.0",
     "parcel-bundler": "^1.6.1"
   },
-
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
 }

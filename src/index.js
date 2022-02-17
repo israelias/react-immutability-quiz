@@ -3,11 +3,16 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { actions, dispatch } from "codesandbox-api";
+
 import "./styles.css";
 
+import Start from "./Start";
 import Button1 from "./Button1";
 import Button2 from "./Button2";
 import Button3 from "./Button3";
+import Confirm from "./Confirm";
+
+// import useForceUpdate from "./ForceUpdate";
 
 /**
  * React Hooks Equality Comparison Quiz
@@ -24,23 +29,18 @@ import Button3 from "./Button3";
  *    9. Answers are at end of module in each Button.
  */
 
-const Welcome = () => (
-  <div>
-    <h1>Welcome</h1>
-  </div>
-);
 const quiz1 = {
   start: {
-    module: "Index",
+    module: "start",
     path: "/src/index.js",
     message: "start",
-    component: Welcome,
+    component: Start,
     part: 0,
     backMessage: "Start",
     nextMessage: "Finished? Click to start next module."
   },
   button1: {
-    module: "Button1",
+    module: "button1",
     path: "/src/Button2.js",
     message: "Finished? Click to start next module.",
     component: Button1,
@@ -49,7 +49,7 @@ const quiz1 = {
     nextMessage: "Finished? Click to start next module."
   },
   button2: {
-    module: "Button2",
+    module: "button2",
     path: "/src/Button2.js",
     message: "button2",
     component: Button2,
@@ -58,7 +58,7 @@ const quiz1 = {
     nextMessage: "Finished? Click to start next module."
   },
   button3: {
-    module: "Button3",
+    module: "button3",
     path: "/src/Button2.js",
     message: "button3",
     component: Button3,
@@ -68,26 +68,21 @@ const quiz1 = {
   }
 };
 
+// const useForceUpdate = (quizModule) => {
+//   const [quiz, setQuiz] = useState(quiz1.start); // integer state
+//   return () => setQuiz(quizObject => quizObject[quizModule]); // update the state to force render
+// }
+
 const App = () => {
   const [quiz, setQuiz] = useState(quiz1.start);
   const [message, setMessage] = useState("");
+  // const forceUpdate = useForceUpdate();
 
-  // switch (part) {
-  //   case 0:
-  //     setQuiz(quiz1.start);
-  //     break;
-  //   case 1:
-  //     setQuiz(quiz1.button1);
-  //     break;
-  //   case 2:
-  //     setQuiz(quiz1.button2);
-  //     break;
-  //   case 3:
-  //     setQuiz(quiz1.button3);
-  //     break;
-  //   default:
-  //   // code block
-  // }
+  const useForceUpdate = () => {
+    //const [quiz, setQuiz] = useState(quiz1.start); // integer state
+    return () => setQuiz((quiz1) => quiz1[module]); // update the state to force render
+  };
+
   const handleClickForward = () => {
     window.alert("HAve you closed the console?");
   };
@@ -104,37 +99,6 @@ const App = () => {
     }
   };
 
-  // setTimeout(() => {
-  //   dispatch(actions.editor.openModule("/src/Button2.js"));
-  // }, 2000);
-
-  // useEffect(() => {
-  //   if (module === 1) {
-  //     setMessage(`Opening ${quiz.module}. Pleae hide the console.`);
-  //     setTimeout(() => {
-  //       dispatch(actions.editor.openModule(quiz.path));
-  //     }, 2000);
-  //   } else if
-  //   (module === 1) {
-  //     setMessage("Opening next module. Pleae hide the console.");
-  //     setTimeout(() => {
-  //       dispatch(actions.editor.openModule("/src/Button2.js"));
-  //     }, 2000);
-  //   } else
-  //   if (module === 1) {
-  //     setMessage("Opening next module. Pleae hide the console.");
-  //     setTimeout(() => {
-  //       dispatch(actions.editor.openModule("/src/Button2.js"));
-  //     }, 2000);
-  //   } else {
-  //     setMessage("Opening next module. Pleae hide the console.");
-  //     setTimeout(() => {
-  //       dispatch(actions.editor.openModule("/src/index.js"));
-  //     }, 2000);
-  //   }
-
-  // }, []);
-
   useEffect(() => {
     setTimeout(() => {
       setMessage(`Opening ${quiz.module}. Pleae hide the console.`);
@@ -148,14 +112,23 @@ const App = () => {
         }, 1000);
     setTimeout(() => {
       dispatch(actions.editor.openModule(quiz.path));
-      // dispatch(actions.editor.expandDevtools(0));
     }, 2000);
   }, [quiz]);
+
+  
   return (
     <main>
-      {quiz.component && <quiz.component />}
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div>
+          {quiz.component && <quiz.component />}
 
-      {message && <p>{message}</p>}
+          {message && <p>{message}</p>}
+        </div>
+        <div>
+          <button onClick={useForceUpdate}>Refresh</button>
+        </div>
+      </div>
+
       <footer
         style={{
           position: "fixed",
@@ -167,14 +140,22 @@ const App = () => {
       >
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div>
-            <button onClick={handleClickBack}>{quiz.backMessage}</button>
+            <Confirm
+              handleConfirm={handleClickBack}
+              confirmText={quiz.backMessage}
+            />
+            {/* <button onClick={handleClickBack}>{quiz.backMessage}</button> */}
             <p>
               <small>{message}</small>
             </p>
           </div>
           <div>
             {quiz.part > 0 && (
-              <button onClick={handleClickForward}>{quiz.nextMessage}</button>
+              <Confirm
+                handleConfirm={handleClickForward}
+                confirmText={quiz.nextMessage}
+              />
+              // <button onClick={handleClickForward}>{quiz.nextMessage}</button>
             )}
             <ul>
               <li>
