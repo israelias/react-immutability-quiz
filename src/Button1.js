@@ -17,7 +17,7 @@ import React, { useState, useEffect } from "react";
 const Button1 = () => {
   const [count, setCount] = useState(0);
 
-  const obj1 = {
+  const obj = {
     a: 1,
     b: 2
   };
@@ -25,13 +25,13 @@ const Button1 = () => {
   console.log("a", count);
 
   useEffect(() => {
-    console.log("obj1", obj1);
-    setCount(count + obj1.a);
+    console.log("obj", obj);
+    setCount(count + obj.a);
   }, []);
 
   const handleClick = () => {
-    setCount(count + obj1.a);
-    console.log(obj1);
+    setCount(count + obj.a);
+    console.log(obj);
   };
 
   return (
@@ -61,12 +61,12 @@ export default Button1;
  *      a 2
  *
  * Why?
- *    useEffect runs after the first render and after every update. 
- *    Our setState update inside our effect hook triggers an update, 
+ *    useEffect runs after the first render and after every update.
+ *    Our setState update inside our effect hook triggers an update,
  *    thus an immediate re-render. Hence `a` is printed twice on first render.
- *    
+ *
  *    Our setState update on every click also triggers a re-render, but does not
  *    change state in the already running code. This is why {a: 1, b: 2} always logs
  *    before the re-rendered `a`.
- *    
+ *
  */

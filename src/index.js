@@ -21,10 +21,45 @@ import Button3 from "./Button3";
  *    9. Answers are at end of module in each Button.
  */
 
+const obj1 = {
+  a: 1,
+  b: 2
+};
+
+const obj2 = {
+  a: 1,
+  b: 2
+};
+
+// console.log(obj1)
+// console.log(obj2)
+
+// console.log(obj1 === obj2)
+
+const array1 = [
+  { a: 1, b: 2 },
+  { a: 1, b: 2 },
+  { a: 1, b: 2 },
+  { a: 1, b: 2 }
+];
+
+const array2 = array1.slice(0, 3);
+
+// console.log(array1 === array2)
+
+console.log(array1[0] === array2[0]);
+
+// const array3 = array1.slice(0, 3)
+
+// console.log(array3[0] === array1[0])
+// console.log(array1 === array3)
+
+// shallow copy (it copies object references), no mutation, both original and copy refer to the same object, if object updates, both update.
+
 const App = () => {
   return (
     <>
-      <Button1 />
+      {/* <Button1 /> */}
       {/* <Button2 /> */}
       {/* <Button3 /> */}
     </>
